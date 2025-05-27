@@ -1,0 +1,27 @@
+
+<HomeScreen>:
+    canvas:
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 10
+
+        # Header
+        Label:
+            text: "TOPI"
+            font_size: 32
+            size_hint_y: 0.1
+
+        # Main content area
+        Label:
+            id: message_label
+            text: "Welcome to your productivity tablet!"
+            font_size: 20
+
+        # Button to connect to backend
+        Button:
+            text: "Connect to Backend"
+            size_hint_y: 0.2
+            on_press: root.fetch_message()
+
