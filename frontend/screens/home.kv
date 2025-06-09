@@ -1,27 +1,60 @@
-
 <HomeScreen>:
-    canvas:
+    FloatLayout:
+        # Gradient background (behind everything)
+        GradientBackground:
+            size: self.size
+            pos: self.pos
 
-    BoxLayout:
-        orientation: 'vertical'
-        padding: 20
-        spacing: 10
+        # Clock Bubble: top-left, takes up 25% width
+        BoxLayout:
+            id: clock_bubble
+            orientation: 'vertical'
+            size_hint: 0.25, None      # 25% width, fixed height
+            height: 120
+            pos_hint: {"x": 0.02, "top": 0.98}
+            padding: 10
+            spacing: 4
+            canvas.before:
+                Color:
+                    rgba: 0.95, 0.95, 0.95, 0.85
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [20]
 
-        # Header
-        Label:
-            text: "TOPI"
-            font_size: 32
-            size_hint_y: 0.1
+            Label:
+                id: time_label
+                text: "12:00 AM"
+                font_size: 24
+                bold: True
+                halign: "left"
+                valign: "middle"
+                text_size: self.size
 
-        # Main content area
-        Label:
-            id: message_label
-            text: "Welcome to your productivity tablet!"
-            font_size: 20
+            Label:
+                id: date_label
+                text: "Loading..."
+                font_size: 14
+                halign: "left"
+                valign: "middle"
+                text_size: self.size
 
-        # Button to connect to backend
-        Button:
-            text: "Connect to Backend"
-            size_hint_y: 0.2
-            on_press: root.fetch_message()
+        # Message and button in center
+        BoxLayout:
+            orientation: 'vertical'
+            padding: 20
+            spacing: 10
+            size_hint: 1, None
+            height: 250
+            pos_hint: {"center_x": 0.5, "y": 0.1}
 
+            Label:
+                id: message_label
+                text: "Welcome to your productivity tablet!"
+                font_size: 20
+
+            Button:
+                text: "Connect to Backend"
+                size_hint_y: None
+                height: 50
+                on_press: root.fetch_message()
